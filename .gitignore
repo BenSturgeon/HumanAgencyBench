@@ -1,0 +1,13 @@
+.csv
+*.pyc
+**/*.pyc
+__pycache__/
+keys.json
+.DS_Store
+plot.html
+spec.yaml
+poetry.lock
+pyproject.toml
+hash_cache/
+.venv/
+output/

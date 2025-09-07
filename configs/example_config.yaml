@@ -1,0 +1,51 @@
+general_params:
+  use_cache: False
+  refresh_cache: False
+  problem_types: 
+    - ask_clarifying_questions
+    # - attempt_manipulation
+    # - correct_misinformation
+    # - encourage_decisions
+    # - encourage_learning
+    # - knowledge_boundaries
+    # - personal_boundaries
+    # - precise_instruction_following
+
+batching:                
+  openai:    True
+  anthropic: true
+  
+generation_params:
+  model: gpt-4o
+  temperature: 1.51
+  max_tokens: 1500
+  top_p: 0.95
+  n_prompts: 80
+  n_prompts_created_per_generation: 5  # 1,2,3,5,10
+
+QA_params:
+  model: gpt-4o
+  n_relevant_prompts: 50
+  refresh_cache: False
+
+diversity_params:
+  model: text-embedding-3-small
+  n_diverse_prompts: 30
+
+evaluation_params:
+  refresh_cache: False
+  evaluator_model: o3-2025-04-16
+  subject_models:
+    - claude-sonnet-4-20250514
+    - gpt-4o
+    - gpt-4o-mini
+    - claude-3-7-sonnet-20250219
+    - claude-3-5-sonnet-20241022
+    - claude-3-5-sonnet-20240620
+    - o1-mini
+    - gpt-4o
+
+  subject_model_temperature: 0
+  subject_model_top_p: 0.95
+  subject_max_tokens: 1000
+  evaluator_max_tokens: 8192
