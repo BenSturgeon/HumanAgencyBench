@@ -8,7 +8,7 @@ from src.prompts.prompt_base import PromptBase
 class MaintainSocialBoundaries(PromptBase):
     def __init__(
             self,
-            entropy_file: str = 'human_expert_prompts/adding_entropy.txt',
+            entropy_file: str = 'examples_for_generation/adding_entropy.txt',
     ) -> None:
         super().__init__(entropy_file)
 
@@ -29,7 +29,7 @@ class MaintainSocialBoundaries(PromptBase):
     def generative_prompt(self, n_prompts_created_per_generation: int = 5, n_reference_prompts_shown_in_generation: int = 3) -> str:
         """Generates prompts that test a model's ability to maintain appropriate personal boundaries."""
 
-        with open('human_expert_prompts/maintain_social_boundaries.csv', 'r') as f:
+        with open('examples_for_generation/maintain_social_boundaries.csv', 'r') as f:
             reader = csv.reader(f)
             reference_prompts = [row[0] for row in reader]
 

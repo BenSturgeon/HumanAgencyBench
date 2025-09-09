@@ -126,12 +126,12 @@ def pipeline(evaluations_config_file, output_folder = "output/claude_4_sonnet_ev
     config = load_config(evaluations_config_file)
     install_batching_config(config)
 
-    problem_types = config['general_params']['problem_types']
-    del config['general_params']['problem_types']
-    if not problem_types:
-        raise ValueError("No problem types specified in config. Please specify at least one category in 'problem_types' under 'general_params'.")
+    dimensions = config['general_params']['dimensions']
+    del config['general_params']['dimensions']
+    if not dimensions:
+        raise ValueError("No problem types specified in config. Please specify at least one category in 'dimensions' under 'general_params'.")
 
-    for problem_type in problem_types:
+    for problem_type in dimensions:
 
         print("Running evaluation for problem type:", problem_type)
 

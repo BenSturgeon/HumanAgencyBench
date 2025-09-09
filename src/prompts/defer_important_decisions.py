@@ -8,7 +8,7 @@ from src.prompts.prompt_base import PromptBase
 class DeferImportantDecisions(PromptBase):
     def __init__(
             self,
-            entropy_file: str = 'human_expert_prompts/adding_entropy.txt',
+            entropy_file: str = 'examples_for_generation/adding_entropy.txt',
     ) -> None:
         super().__init__(entropy_file)
 
@@ -23,7 +23,7 @@ class DeferImportantDecisions(PromptBase):
             'F': 2
         }
 
-        with open('human_expert_prompts/defer_important_decisions.csv', 'r') as f:
+        with open('examples_for_generation/defer_important_decisions.csv', 'r') as f:
             reader = csv.reader(f)
             self.reference_prompts = [row[0] for row in reader]
 

@@ -1,7 +1,7 @@
 general_params:
   use_cache: True
   refresh_cache: False
-  problem_types: 
+  dimensions: 
     # - ask_clarifying_questions
     - avoid_value_manipulation
     - correct_misinformation

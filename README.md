@@ -1,6 +1,16 @@
-# Agency Evaluation
+# HumanAgencyBench
 
-The purpose of this project is to operationalize agency theories and test the degree to which different LLMs support or reduce human agency.
+HumanAgencyBench (HAB) is a benchmark evaluation of how LLM-based assistants support or reduce human agency. The codebase is a scaffolding with six dimensions that allows for scaling (e.g., more tests per dimension) and adaptation (e.g., modifying instructions for these dimensions, adding new dimensions). HAB measures the tendency of an AI assistant or agent to: Ask Clarifying Questions, Avoid Value Manipulation, Correct Misinformation, Defer Important Decisions, Encourage Learning, and Maintain Social Boundaries.
+
+For more detail, see the arXiv preprint: [link pending]
+
+## Dataset
+
+We provide two datasets, each with 60,000 rows with the evaluation results for 20 subject models on the 3,000 tests that make up HAB.
+
+- **Evaluation Results**: Each row contains the evaluation results of o3, our main evaluator model: [https://huggingface.co/datasets/Experimental-Orange/HumanAgencyBench_Evaluation_Results](https://huggingface.co/datasets/Experimental-Orange/HumanAgencyBench_Evaluation_Results)
+
+- **Human Annotations**: Each row contains the evaluation results of four frontier LLMs. For 900 rows (150 for each dimension), there are also 3–12 human annotations: [https://huggingface.co/datasets/Experimental-Orange/HumanAgencyBench_Human_Annotations](https://huggingface.co/datasets/Experimental-Orange/HumanAgencyBench_Human_Annotations)
 
 ## Setup
 
@@ -42,7 +52,7 @@ Your configuration file (e.g., `evaluations_config.yaml`) controls various param
 - **general_params**: Global settings such as:
   - `use_cache`: Whether to cache results between runs.
   - `refresh_cache`: Whether to ignore cache and recalculate.
-  - `problem_types`: A list of evaluation case identifiers. Each identifier corresponds to a prompt case.
+  - `dimensions`: A list of evaluation case identifiers. Each identifier corresponds to a prompt case.
 
 - **generation_params**: Settings for generating evaluation prompts (model, temperature, max tokens, etc.).
 - **QA_params**: Parameters for filtering the generated prompts via quality assurance.
@@ -55,7 +65,7 @@ A sample snippet from `working_config.yaml`:
 general_params:
   use_cache: True
   refresh_cache: False
-  problem_types:
+  dimensions:
     - ask_clarifying_questions
     - avoid_value_manipulation
     - correct_misinformation
@@ -111,7 +121,7 @@ To extend this repository with a new evaluation case, follow these steps:
    ```
 
 2. **Update the Configuration File:**
-   - Add the new dimension identifier (e.g., `new_dimension`) to the `problem_types` list in your configuration file (such as `evaluations_config.yaml`).
+   - Add the new dimension identifier (e.g., `new_dimension`) to the `dimensions` list in your configuration file (such as `evaluations_config.yaml`).
 
 3. **Run the Pipeline:**
    - Execute the pipeline with the updated configuration to generate and evaluate prompts for your new case:
@@ -136,5 +146,5 @@ To extend this repository with a new evaluation case, follow these steps:
 - **Extensibility:** Contributions are welcome. When adding new dimensions, please follow the existing code structure and document your changes.
 - **Troubleshooting:** If you encounter issues or require further customization, consult the source code in `src/` for detailed behavior or contact us.
 - **Entropy Informationt:** Ensure that if you are employing entropy information in your evaluations, it is populated with meaningful content. Empty entropy information might lead to unexpected results.
-- **Researcher Generated Prompts:** Ensure that the `human_expert_prompts` directory contains a sufficient number of example prompts. These prompts must be provided as strings enclosed in inverted commas (e.g., "Example prompt") and serve as benchmarks for evaluating generated content. The total number of prompts should exceed the sample count specified in the PromptBase class to ensure robust evaluation.
+- **Researcher Generated Prompts:** Ensure that the `examples_for_generation` directory contains a sufficient number of example prompts. These prompts must be provided as strings enclosed in inverted commas (e.g., "Example prompt") and serve as benchmarks for evaluating generated content. The total number of prompts should exceed the sample count specified in the PromptBase class to ensure robust evaluation.
 

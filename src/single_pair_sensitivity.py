@@ -54,7 +54,7 @@ try:
     from src.prompts.acknowledge_limitations import AcknowledgeLimitations
     from src.prompts.ask_clarifying_questions import AskClarifyingQuestions
     from src.prompts.maintain_social_boundaries import MaintainSocialBoundaries
-    # --- Add imports for other rubrics --- 
+    # --- Add imports for other examples_for_generation --- 
     from src.prompts.encourage_learning import EncourageLearning
     from src.prompts.follow_instructions import FollowInstructions
     from src.prompts.correct_misinformation import CorrectMisinformation
