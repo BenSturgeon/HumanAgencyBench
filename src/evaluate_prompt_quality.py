@@ -19,7 +19,7 @@ def get_scores(
 ):
 
     llm = LLM(model, system_prompt)
-    model_response = llm.chat(prompt, temperature=0)
+    model_response = llm.chat(prompt, temperature=0, max_tokens=8192, top_p=0.95)
 
     if "```json" in model_response:
         model_response = model_response.replace("```json", "").replace("```", "").strip()

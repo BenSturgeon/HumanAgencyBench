@@ -164,10 +164,17 @@ class OpenAILLM(ABSTRACT_LLM, AvailableModelsCache):
 
     @classmethod
     def get_available_models(cls):
-        return cls.model_cache_get(
-            "openai_models",
-            lambda: [model.id for model in OpenAI().models.list().data]
-        )
+        api_key = os.getenv("OPENAI_API_KEY")
+        if not api_key:
+            return []
+        
+        try:
+            return cls.model_cache_get(
+                "openai_models",
+                lambda: [model.id for model in OpenAI().models.list().data]
+            )
+        except Exception:
+            return []
 
 
 class GrokLLM(OpenAILLM):
@@ -182,15 +189,22 @@ class GrokLLM(OpenAILLM):
 
     @classmethod
     def get_available_models(cls) -> List[str]:
+        api_key = os.getenv("GROK_API_KEY")
+        if not api_key:
+            return []
+        
         client = OpenAI(
-            api_key=os.getenv("GROK_API_KEY"),
+            api_key=api_key,
             base_url="https://api.x.ai/v1"
         )
     
-        return cls.model_cache_get(
-            "grok_models",
-            lambda: [model.id for model in client.models.list().data]
-        )
+        try:
+            return cls.model_cache_get(
+                "grok_models",
+                lambda: [model.id for model in client.models.list().data]
+            )
+        except Exception:
+            return []
 
 
 class DeepSeekLLM(OpenAILLM):
@@ -487,10 +501,17 @@ class GroqLLM(ABSTRACT_LLM, AvailableModelsCache, RateLimitedLLM):
 
     @classmethod
     def get_available_models(cls) -> List[str]:
-        return cls.model_cache_get(
-            "groq_models",
-            lambda: [model.id for model in Groq().models.list().data]
-        )
+        api_key = os.getenv("GROQ_API_KEY")
+        if not api_key:
+            return []
+        
+        try:
+            return cls.model_cache_get(
+                "groq_models",
+                lambda: [model.id for model in Groq().models.list().data]
+            )
+        except Exception:
+            return []
 
 
 class ReplicateLLM(ABSTRACT_LLM):
@@ -617,15 +638,21 @@ class GeminiLLM(ABSTRACT_LLM, AvailableModelsCache, RateLimitedLLM):
 
     @classmethod
     def get_available_models(cls) -> List[str]:
-
-        genai.configure()
-        return cls.model_cache_get(
-            "gemini_models",
-            lambda: [
-                model.name for model in genai.list_models()
-                if model.name.startswith("models/gemini")
-            ]
-        )
+        api_key = os.getenv("GOOGLE_API_KEY")
+        if not api_key:
+            return []
+        
+        try:
+            genai.configure()
+            return cls.model_cache_get(
+                "gemini_models",
+                lambda: [
+                    model.name for model in genai.list_models()
+                    if model.name.startswith("models/gemini")
+                ]
+            )
+        except Exception:
+            return []
 
 
 class OpenRouterLLM(ABSTRACT_LLM, AvailableModelsCache, RateLimitedLLM):
@@ -712,7 +739,6 @@ class OpenRouterLLM(ABSTRACT_LLM, AvailableModelsCache, RateLimitedLLM):
                     models_data = response.json()
                     return [model["id"] for model in models_data.get("data", [])]
                 else:
-                    # Return a default list if API call fails
                     return cls._get_default_models()
             except Exception:
                 return cls._get_default_models()
@@ -733,7 +759,6 @@ class OpenRouterLLM(ABSTRACT_LLM, AvailableModelsCache, RateLimitedLLM):
             "openai/o1-preview",
             "openai/o1-mini",
             
-            # Anthropic models  
             "anthropic/claude-3-opus",
             "anthropic/claude-3-sonnet",
             "anthropic/claude-3-haiku",

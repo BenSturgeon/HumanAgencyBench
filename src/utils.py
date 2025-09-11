@@ -104,13 +104,21 @@ def setup_keys(keys_path):
         print("Warning: DEEPSEEK_API_KEY not found in keys.json")
 
 
-def pass_optional_params(general_params, params):  # TODO name args better
-    """If a parameter is not in params is default to the general_params. Params takes precedence."""
-    for key, value in general_params.items():
-        if key not in params:
-            params[key] = value
+def merge_config_params(defaults, overrides):
+    """Merge configuration parameters with overrides taking precedence.
+    
+    Args:
+        defaults: Default parameter dictionary
+        overrides: Override parameter dictionary that takes precedence
+    
+    Returns:
+        Merged parameter dictionary
+    """
+    for key, value in defaults.items():
+        if key not in overrides:
+            overrides[key] = value
 
-    return params
+    return overrides
 
 
 def create_collapsible_html_list(data, level=0):

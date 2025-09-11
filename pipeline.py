@@ -3,7 +3,7 @@ import os
 import pandas as pd
 import argh
 
-from src.utils import setup_keys, pass_optional_params, load_config
+from src.utils import setup_keys, merge_config_params, load_config
 from src.dataset_generation import generate_dataset
 from src.evaluate_prompt_quality import calculate_prompt_scores
 from src.diversity import evaluate_prompt_diversity
@@ -26,7 +26,7 @@ PLOT_HEIGHTS = 600
 def generate_and_format_dataset(general_params: dict, generation_params: dict, prompt_object: PromptBase) -> tuple:
 
     prompts, system_prompts, generative_prompts = generate_dataset(
-        **pass_optional_params(general_params=general_params, params=generation_params),
+        **merge_config_params(defaults=general_params, overrides=generation_params),
         prompt_object=prompt_object
     )
 
@@ -64,7 +64,7 @@ def calculate_and_visualize_scores(prompts: list, generative_prompts, config: di
 
     relevance_score, relevance_system_prompt, relevance_prompt, passed_evaluation, model_response = calculate_prompt_scores(
         prompts,
-        **pass_optional_params(general_params=config['general_params'], params=config['QA_params']),
+        **merge_config_params(defaults=config['general_params'], overrides=config['QA_params']),
         prompt_object=prompt_object,
         misinformation=misinformation
     )
@@ -89,7 +89,7 @@ def evaluate_and_visualize_diversity(df: pd.DataFrame, config: dict) -> tuple:
 
     embeddings, pca_features, cluster, representative_samples, is_representative = evaluate_prompt_diversity(
         df['prompt'].tolist(),
-        **pass_optional_params(general_params=config['general_params'], params=config['diversity_params']),
+        **merge_config_params(defaults=config['general_params'], overrides=config['diversity_params']),
     )
 
     html_str = visualize_diversity(df, representative_samples, pca_features, cluster)
@@ -104,7 +104,7 @@ def evaluate_and_visualize_model(df: pd.DataFrame, config: dict, prompt_object: 
 
     eval_results_df = evaluate_many_subject_models(
         df['prompt'].tolist(),
-        **pass_optional_params(general_params=config['general_params'], params=config['evaluation_params']),
+        **merge_config_params(defaults=config['general_params'], overrides=config['evaluation_params']),
         prompt_object=prompt_object,
         misinformation=df['misinformation'].tolist() if 'misinformation' in df.columns else None
     )
@@ -120,7 +120,7 @@ def evaluate_and_visualize_model(df: pd.DataFrame, config: dict, prompt_object: 
     return html_out, html_scores, df
 
 
-def pipeline(evaluations_config_file, output_folder = "output/claude_4_sonnet_evaluator"):  # TODO, revert to output/output
+def pipeline(evaluations_config_file, output_folder = "output/output"):
     
     setup_keys(KEYS_PATH)
     config = load_config(evaluations_config_file)
@@ -147,7 +147,7 @@ def pipeline(evaluations_config_file, output_folder = "output/claude_4_sonnet_ev
 
             df_generate = generate_and_format_dataset(config['general_params'], config['generation_params'], prompt_object)
 
-            if (gen_diversity_test := True):  # TODO, remove this once gen diversity is done
+            if (gen_diversity_test := True):
                 df_generate.to_csv(os.path.join(results_output_folder, 'gen.csv'), index=False)
 
             if "QA_params" in config:
