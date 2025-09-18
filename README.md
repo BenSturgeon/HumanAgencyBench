@@ -2,15 +2,13 @@
 
 HumanAgencyBench (HAB) is a benchmark evaluation of how LLM-based assistants support or reduce human agency. The codebase is a scaffolding with six dimensions that allows for scaling (e.g., more tests per dimension) and adaptation (e.g., modifying instructions for these dimensions, adding new dimensions). HAB measures the tendency of an AI assistant or agent to: Ask Clarifying Questions, Avoid Value Manipulation, Correct Misinformation, Defer Important Decisions, Encourage Learning, and Maintain Social Boundaries.
 
-For more detail, see the arXiv preprint: [https://arxiv.org/abs/2509.08494](https://arxiv.org/abs/2509.08494)
-
 ## Dataset
 
 We provide two datasets, each with 60,000 rows with the evaluation results for 20 subject models on the 3,000 tests that make up HAB.
 
-- **Evaluation Results**: Each row contains the evaluation results of o3, our main evaluator model: [https://huggingface.co/datasets/Experimental-Orange/HumanAgencyBench_Evaluation_Results](https://huggingface.co/datasets/Experimental-Orange/HumanAgencyBench_Evaluation_Results)
+- **Evaluation Results**: Each row contains the evaluation results of o3, our main evaluator model: [anonymyized for peer review]
 
-- **Human Annotations**: Each row contains the evaluation results of four frontier LLMs. For 900 rows (150 for each dimension), there are also 3–12 human annotations: [https://huggingface.co/datasets/Experimental-Orange/HumanAgencyBench_Human_Annotations](https://huggingface.co/datasets/Experimental-Orange/HumanAgencyBench_Human_Annotations)
+- **Human Annotations**: Each row contains the evaluation results of four frontier LLMs. For 900 rows (150 for each dimension), there are also 3–12 human annotations: [anonymyized for peer review]
 
 ## Setup
 
@@ -147,22 +145,4 @@ To extend this repository with a new evaluation case, follow these steps:
 - **Troubleshooting:** If you encounter issues or require further customization, consult the source code in `src/` for detailed behavior or contact us.
 - **Entropy Informationt:** Ensure that if you are employing entropy information in your evaluations, it is populated with meaningful content. Empty entropy information might lead to unexpected results.
 - **Researcher Generated Prompts:** Ensure that the `examples_for_generation` directory contains a sufficient number of example prompts. These prompts must be provided as strings enclosed in inverted commas (e.g., "Example prompt") and serve as benchmarks for evaluating generated content. The total number of prompts should exceed the sample count specified in the PromptBase class to ensure robust evaluation.
-
-## Citation
-
-If you use HumanAgencyBench in your research, please cite our paper:
-
-```bibtex
-@misc{
-  sturgeon_humanagencybench_2025,
-  title={HumanAgencyBench: Scalable Evaluation of Human Agency Support in AI Assistants},
-  author={Sturgeon, Benjamin and Samuelson, Daniel and Haimes, Jacob and Anthis, Jacy Reese},
-  year={2025},
-  eprint={2509.08494},
-  archivePrefix={arXiv},
-  primaryClass={cs.CY},
-  url={https://arxiv.org/abs/2509.08494},
-  doi={10.48550/arXiv.2509.08494}
-}
-```
 

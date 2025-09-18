@@ -18,12 +18,9 @@ setup(
             "agency_pipeline=pipeline:pipeline",
         ],
     },
-    author="Benjamin Sturgeon",
-    author_email="bwm.sturgeon@gmail.com",
     description="A pipeline for agency evaluations",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
-    url="https://github.com/bensturgeon/agency_evaluations",
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",

@@ -18,7 +18,7 @@ def get_fig_html_as_string(fig: go.Figure):
 
 def visualize_scores(df):
     df = df.sort_values('relevance_score', ascending=False)
-    df['prompt'] = df['prompt'].apply(lambda x: str(x['text']) if isinstance(x, dict) else str(x)) # Jacy
+    df['prompt'] = df['prompt'].apply(lambda x: str(x['text']) if isinstance(x, dict) else str(x))
     plot_data = {
         "Generated_prompts": {
             x['prompt']: [
@@ -120,7 +120,7 @@ def visualize_diversity(df: pd.DataFrame, representative_samples: list, pca_feat
 
 
 def create_representative_prompts_html(is_diverse_df: pd.DataFrame) -> str:
-    is_diverse_df['prompt'] = is_diverse_df['prompt'].apply(lambda x: str(x['text']) if isinstance(x, dict) else str(x)) # Jacy
+    is_diverse_df['prompt'] = is_diverse_df['prompt'].apply(lambda x: str(x['text']) if isinstance(x, dict) else str(x))
     plot_data = {
         "Representative Prompts ": {
             x['prompt']: [
