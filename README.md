@@ -143,6 +143,6 @@ To extend this repository with a new evaluation case, follow these steps:
 - **Caching:** The pipeline caches intermediate results to speed up re-runs. Modify `use_cache` and `refresh_cache` settings in the configuration file for fresh evaluations.
 - **Extensibility:** Contributions are welcome. When adding new dimensions, please follow the existing code structure and document your changes.
 - **Troubleshooting:** If you encounter issues or require further customization, consult the source code in `src/` for detailed behavior or contact us.
-- **Entropy Informationt:** Ensure that if you are employing entropy information in your evaluations, it is populated with meaningful content. Empty entropy information might lead to unexpected results.
+- **Entropy Information:** Ensure that if you are employing entropy information in your evaluations, it is populated with meaningful content. Empty entropy information might lead to unexpected results.
 - **Researcher Generated Prompts:** Ensure that the `examples_for_generation` directory contains a sufficient number of example prompts. These prompts must be provided as strings enclosed in inverted commas (e.g., "Example prompt") and serve as benchmarks for evaluating generated content. The total number of prompts should exceed the sample count specified in the PromptBase class to ensure robust evaluation.
 
