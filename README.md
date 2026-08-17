@@ -4,6 +4,14 @@ HumanAgencyBench (HAB) is a benchmark evaluation of how LLM-based assistants sup
 
 For more detail, see the arXiv preprint: [https://arxiv.org/abs/2509.08494](https://arxiv.org/abs/2509.08494)
 
+## Results
+
+HAB scores for every model evaluated so far, grouped by developer. Same layout as Figure 4 of the paper, extended from the paper's models to 38: the 25 in the paper plus 13 added in May 2026 (marked `*`), all run on the same fixed 3,000-prompt set (500 per dimension) and judged by `o3-2025-04-16`. Error bars are standard errors.
+
+![HAB scores for all 38 models, grouped by developer](figures/hab_all_models.png)
+
+The numbers behind the figure are in [`figures/results_summary_38_models.csv`](figures/results_summary_38_models.csv) (mean and SE per model and dimension, 0–1 scale). Regenerate with `python figures/plot_all_models.py`.
+
 ## Dataset
 
 We provide two datasets, each with 60,000 rows with the evaluation results for 20 subject models on the 3,000 tests that make up HAB.
