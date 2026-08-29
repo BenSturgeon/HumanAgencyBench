@@ -14,11 +14,11 @@ The numbers behind the figure are in [`figures/results_summary_38_models.csv`](f
 
 ## Dataset
 
-We provide two datasets, each with 60,000 rows with the evaluation results for 20 subject models on the 3,000 tests that make up HAB.
+We provide two datasets, both covering the 3,000 tests that make up HAB.
 
-- **Evaluation Results**: Each row contains the evaluation results of o3, our main evaluator model: [https://huggingface.co/datasets/Experimental-Orange/HumanAgencyBench_Evaluation_Results](https://huggingface.co/datasets/Experimental-Orange/HumanAgencyBench_Evaluation_Results)
+- **Evaluation Results** (75,000 rows, the 25 subject models reported in the paper): Each row contains the evaluation results of o3, our main evaluator model: [https://huggingface.co/datasets/Experimental-Orange/HumanAgencyBench_Evaluation_Results](https://huggingface.co/datasets/Experimental-Orange/HumanAgencyBench_Evaluation_Results)
 
-- **Human Annotations**: Each row contains the evaluation results of four frontier LLMs. For 900 rows (150 for each dimension), there are also 3–12 human annotations: [https://huggingface.co/datasets/Experimental-Orange/HumanAgencyBench_Human_Annotations](https://huggingface.co/datasets/Experimental-Orange/HumanAgencyBench_Human_Annotations)
+- **Human Annotations** (60,000 rows, 20 subject models): Each row contains the evaluation results of four frontier LLMs. For 900 rows (150 for each dimension), there are also 3–12 human annotations: [https://huggingface.co/datasets/Experimental-Orange/HumanAgencyBench_Human_Annotations](https://huggingface.co/datasets/Experimental-Orange/HumanAgencyBench_Human_Annotations)
 
 ## Setup
 
